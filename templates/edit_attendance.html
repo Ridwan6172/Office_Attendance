@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Edit Attendance for {{ record.employee_id }} ({{ record.date }})</h3>
+<form method="POST">
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select name="status" class="form-control">
+      <option value="Present" {% if record.status == 'Present' %}selected{% endif %}>Present</option>
+      <option value="Late" {% if record.status == 'Late' %}selected{% endif %}>Late</option>
+      <option value="Absent" {% if record.status == 'Absent' %}selected{% endif %}>Absent</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="sign_in">Sign In Time</label>
+    <input type="text" class="form-control" name="sign_in" value="{{ record.sign_in }}">
+  </div>
+  <div class="form-group">
+    <label for="sign_out">Sign Out Time</label>
+    <input type="text" class="form-control" name="sign_out" value="{{ record.sign_out }}">
+  </div>
+  <button type="submit" class="btn btn-primary">Update Attendance</button>
+  <a href="/admin/employee/{{ record.employee_id }}" class="btn btn-secondary ml-2">Back to Employee Report</a>
+</form>
+{% endblock %}

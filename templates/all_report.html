@@ -1,0 +1,91 @@
+{% extends "base.html" %} {% block content %}
+<h3 class="mb-4 text-center">All Employee Attendance Report</h3>
+
+<!-- Filter Form with Improved Layout -->
+<form method="POST" class="form-inline justify-content-center mb-3">
+  <div class="form-group">
+    <label for="month" class="mr-2">Select Month:</label>
+    <input type="month" name="month" class="form-control mr-2" required />
+  </div>
+  <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<!-- Back to Dashboard Button -->
+<div class="mb-3 text-center">
+  <a href="/admin/dashboard" class="btn btn-secondary">← Back to Dashboard</a>
+</div>
+
+<!-- CSV Download Button -->
+<div class="mb-3 text-right">
+  <a
+    href="/download-csv{% if selected_month %}?month={{ selected_month }}{% endif %}"
+    class="btn btn-success"
+  >
+    Download CSV
+  </a>
+</div>
+
+<!-- Attendance Table with Styling and Tooltips -->
+<table class="table table-bordered table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>Date</th>
+      <th>Employee ID</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Sign In</th>
+      <th>Sign Out</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in records %}
+    <tr>
+      <td>{{ row.date }}</td>
+      <td>{{ row.employee_id }}</td>
+      <td>{{ row.name }}</td>
+      <td>{{ row.department }}</td>
+      <td>{{ row.sign_in or "-" }}</td>
+      <td>{{ row.sign_out or "-" }}</td>
+      <td>{{ row.status }}</td>
+      <td class="d-flex justify-content-around">
+        <!-- Individual Report Button with Tooltip -->
+        <a
+          href="/admin/download-individual-report/{{ row.employee_id }}"
+          class="btn btn-info btn-sm"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Download individual attendance report"
+        >
+          Download Report
+        </a>
+
+        <!-- View Individual Attendance Button with Tooltip -->
+        <a
+          href="/admin/employee/{{ row.employee_id }}"
+          class="btn btn-primary btn-sm"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="View detailed attendance"
+        >
+          View Attendance
+        </a>
+
+        <!-- Edit Button with Tooltip -->
+        <a
+          href="/admin/edit-attendance/{{ row.id }}"
+          class="btn btn-warning btn-sm"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Edit attendance details"
+        >
+          Edit
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

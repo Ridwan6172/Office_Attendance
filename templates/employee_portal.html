@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <!-- Company Title -->
+  <div class="text-center mb-4">
+    <h1 class="font-weight-bold text-primary">Way Wise Global</h1>
+  </div>
+
+  <!-- Attendance Form Section -->
+  <div class="card shadow-lg p-4">
+    <h2 class="text-center mb-4">Employee Attendance</h2>
+    <form method="POST">
+      <div class="form-group">
+        <label for="employee_id" class="font-weight-bold"
+          >Enter your Employee ID:</label
+        >
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          name="employee_id"
+          required
+        />
+      </div>
+
+      <!-- Buttons Section -->
+      <div class="btn-group btn-block mt-4">
+        <button
+          type="submit"
+          name="action"
+          value="in"
+          class="btn btn-success btn-lg"
+        >
+          <i class="bi bi-door-open"></i> Sign In
+        </button>
+        <button
+          type="submit"
+          name="action"
+          value="out"
+          class="btn btn-danger btn-lg"
+        >
+          <i class="bi bi-door-closed"></i> Sign Out
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <!-- Dashboard Header -->
+  <div class="text-center mb-5">
+    <h3 class="font-weight-bold text-primary">Admin Dashboard</h3>
+  </div>
+
+  <!-- Dashboard Cards Row -->
+  <div class="row mt-4">
+    <!-- Present Today Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-4 shadow-lg">
+        <div class="card-body">
+          <h5 class="card-title text-center">Present Today</h5>
+          <p class="card-text text-center display-4">{{ present }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Late Today Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-warning mb-4 shadow-lg">
+        <div class="card-body">
+          <h5 class="card-title text-center">Late Today</h5>
+          <p class="card-text text-center display-4">{{ late }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Absent Today Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-danger mb-4 shadow-lg">
+        <div class="card-body">
+          <h5 class="card-title text-center">Absent Today</h5>
+          <p class="card-text text-center display-4">{{ absent }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="text-center">
+    <a href="/admin/report" class="btn btn-lg btn-primary mx-2">
+      <i class="bi bi-clipboard-data"></i> View All Attendance
+    </a>
+    <a href="/admin/add-employee" class="btn btn-lg btn-success mx-2">
+      <i class="bi bi-person-plus"></i> Add New Employee
+    </a>
+    <a href="/admin/logout" class="btn btn-lg btn-secondary float-right">
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+  </div>
+</div>
+{% endblock %}

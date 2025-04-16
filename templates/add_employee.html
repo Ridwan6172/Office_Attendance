@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block content %}
+<h3>Add New Employee</h3>
+<form method="POST">
+  <div class="form-group">
+    <label for="employee_id">Employee ID</label>
+    <input type="text" class="form-control" name="employee_id" required />
+  </div>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" name="name" required />
+  </div>
+  <div class="form-group">
+    <label for="department">Department</label>
+    <input type="text" class="form-control" name="department" required />
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" name="email" required />
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password" required />
+  </div>
+  <button type="submit" class="btn btn-primary">Add Employee</button>
+  <a href="/admin/dashboard" class="btn btn-secondary ml-2"
+    >Back to Dashboard</a
+  >
+</form>
+{% endblock %}

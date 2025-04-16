@@ -1,0 +1,175 @@
+{% extends "base.html" %} {% block content %}
+<!-- Page Content -->
+<div class="container">
+  <h3 class="text-center">
+    Attendance Report for {{ employee.name }} ({{ employee.employee_id }})
+  </h3>
+
+  <div class="employee-info">
+    <p><strong>Department:</strong> {{ employee.department }}</p>
+    <p><strong>Email:</strong> {{ employee.email }}</p>
+  </div>
+
+  <form method="POST" class="filter-form">
+    <label for="month">Select Month:</label>
+    <input
+      type="month"
+      name="month"
+      value="{{ selected_month or '' }}"
+      class="month-picker"
+    />
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </form>
+
+  <h2>Attendance Records</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Sign In</th>
+        <th>Sign Out</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for record in records %}
+      <tr>
+        <td>{{ record.date }}</td>
+        <td>{{ record.sign_in }}</td>
+        <td>{{ record.sign_out }}</td>
+        <td>{{ record.status }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Add a download button -->
+  <div class="download-btn-container">
+    <a
+      href="{{ url_for('download_individual_report', emp_id=employee.employee_id) }}"
+    >
+      <button class="btn btn-success">Download Report</button>
+    </a>
+  </div>
+
+  <!-- Back to Dashboard Link -->
+  <div class="back-link">
+    <a href="/admin/dashboard">Back to Dashboard</a>
+  </div>
+</div>
+
+<!-- Page Styling -->
+<style>
+  body {
+    font-family: "Arial", sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  h1,
+  h2 {
+    color: #4caf50;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .employee-info {
+    margin-bottom: 20px;
+  }
+
+  .employee-info p {
+    font-size: 18px;
+  }
+
+  .filter-form {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .filter-form label {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .month-picker {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn-primary {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #45a049;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  .table th,
+  .table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+
+  .table th {
+    background-color: #f2f2f2;
+  }
+
+  .back-link {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .back-link a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+  }
+
+  .back-link a:hover {
+    text-decoration: underline;
+  }
+
+  .download-btn-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+</style>
+
+{% endblock %}
