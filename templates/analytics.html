@@ -1,0 +1,24 @@
+<canvas id="attendanceChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const stats = {{ stats | tojson }};
+  const labels = stats.map(s => 'Month ' + s.month);
+  const present = stats.map(s => s.present);
+  const late = stats.map(s => s.late);
+  const absent = stats.map(s => s.absent);
+
+  const data = {
+    labels: labels,
+    datasets: [
+      { label: 'Present', data: present, backgroundColor: 'green' },
+      { label: 'Late', data: late, backgroundColor: 'orange' },
+      { label: 'Absent', data: absent, backgroundColor: 'red' },
+    ]
+  };
+
+  new Chart(document.getElementById('attendanceChart'), {
+    type: 'bar',
+    data: data,
+    options: { responsive: true, plugins: { legend: { position: 'top' } } }
+  });
+</script>
